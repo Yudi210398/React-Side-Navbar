@@ -1,8 +1,10 @@
 import React from "react";
 import classes from "./halaman.module.css";
+import { useSelector } from "react-redux";
 const Overview = () => {
+  const { contenOutNav } = useSelector((state) => state.outNav);
   return (
-    <div className={`row ${classes.data}`}>
+    <div className={`row ${contenOutNav ? classes.navOut : classes.navIn}`}>
       <div className="col-12">
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus

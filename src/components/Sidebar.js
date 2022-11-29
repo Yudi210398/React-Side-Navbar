@@ -6,7 +6,8 @@ import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
-
+import { isContenOutNav } from "../Data/AuthSlice";
+import { useDispatch } from "react-redux";
 const Nav = styled.div`
   background: #15171c;
   height: 80px;
@@ -42,24 +43,34 @@ const SidebarWrap = styled.div`
 `;
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const [sidebar, setSidebar] = useState(false);
+  const OnOutNavContent = (contenOutNav) =>
+    dispatch(isContenOutNav({ contenOutNav }));
 
-  const showSidebar = () => {
-    setSidebar(!sidebar);
-  };
-
+  const showSidebar = () => setSidebar(!sidebar);
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         <Nav>
           <NavIcon to="#">
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars
+              onClick={() => {
+                showSidebar();
+                OnOutNavContent(true);
+              }}
+            />
           </NavIcon>
         </Nav>
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>
             <NavIcon to="#">
-              <AiIcons.AiOutlineClose onClick={showSidebar} />
+              <AiIcons.AiOutlineClose
+                onClick={() => {
+                  showSidebar();
+                  OnOutNavContent(false);
+                }}
+              />
             </NavIcon>
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;

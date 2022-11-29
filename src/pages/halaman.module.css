@@ -1,5 +1,14 @@
-.data {
+.navIn {
   padding-top: 10px;
+  width: 100%;
+  padding-left: 19px;
+  transition: 350ms;
+  text-align: justify;
+}
+
+.navOut {
+  padding-top: 10px;
+  transition: 350ms;
   width: 100%;
   padding-left: 269px;
   text-align: justify;
